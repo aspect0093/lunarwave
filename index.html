@@ -1,0 +1,197 @@
+<!DOCTYPE html><html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Lunarwave | Discover Discord Servers</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <style>
+    body { font-family: 'Segoe UI', sans-serif; }
+    .glow-text {
+      background: linear-gradient(to right, #00ffff, #0077ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+    .card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      backdrop-filter: blur(10px);
+      transition: transform 0.3s, box-shadow 0.3s;
+    }
+    .card:hover { transform: scale(1.01); box-shadow: 0 0 15px #00ffff33; }
+    .nsfw-tag {
+      background-color: #dc2626;
+      color: white;
+      padding: 2px 6px;
+      border-radius: 4px;
+      font-size: 0.75rem;
+      margin-left: 6px;
+    }
+  </style>
+</head>
+<body class="bg-black text-white">
+  <!-- Navbar -->
+  <nav class="bg-black/80 shadow-md fixed w-full top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <h1 class="text-cyan-400 text-2xl font-bold">Lunarwave</h1>
+      <div class="flex items-center space-x-4">
+        <button class="md:hidden text-white text-3xl" onclick="toggleMenu()">☰</button>
+        <div id="auth-section"></div>
+      </div>
+      <ul id="menu" class="hidden md:flex space-x-4 text-white font-medium">
+        <li><a href="#" class="hover:text-cyan-400">Home</a></li>
+        <li><a href="#" class="hover:text-cyan-400">Submit</a></li>
+        <li><a href="#" class="hover:text-cyan-400">My Servers</a></li>
+        <li id="admin-link" class="hidden"><a href="#" class="hover:text-red-400">Admin Panel</a></li>
+      </ul>
+    </div>
+    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 text-white">
+      <a href="#" class="block py-2">Home</a>
+      <a href="#" class="block py-2">Submit</a>
+      <a href="#" class="block py-2">My Servers</a>
+      <a id="mobile-admin-link" href="#" class="block py-2 text-red-400 hidden">Admin Panel</a>
+    </div>
+  </nav>  <header class="text-center pt-32 px-4">
+    <h1 class="text-5xl font-extrabold glow-text mb-3">Discover Discord Servers</h1>
+    <p class="text-gray-300 max-w-lg mx-auto mb-6">Find your next favorite community. Bump your server. All in Lunarwave style.</p>
+    <div class="mt-4 flex justify-center">
+      <input id="search-input" type="text" placeholder="Search tags or keywords..." class="px-4 py-2 rounded-l-md text-black">
+      <button onclick="filterServers()" class="bg-cyan-500 px-4 py-2 rounded-r-md hover:bg-cyan-600">Search</button>
+    </div>
+  </header>  <section class="px-4 mt-14 max-w-6xl mx-auto">
+    <h2 class="text-2xl font-bold mb-4 text-cyan-400">🔥 Top Active Servers</h2>
+    <div id="server-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
+    <p id="loading" class="text-center text-gray-400 mt-6">Loading servers...</p>
+  </section>  <footer class="text-center text-gray-600 text-sm py-6 mt-16 border-t border-gray-800">
+    © 2025 Lunarwave. Built for community.
+  </footer>  <script>
+    let allServers = [];
+    let serverOffset = 0;
+    const serverLimit = 12;
+
+    function toggleMenu() {
+      document.getElementById("mobile-menu").classList.toggle("hidden");
+    }
+
+    async function checkLogin() {
+      const auth = document.getElementById("auth-section");
+      try {
+        const res = await fetch("http://in1.hostmc.fun:25944/api/user", { credentials: 'include' });
+        const data = await res.json();
+        if (data.loggedIn) {
+          const avatarUrl = `https://cdn.discordapp.com/avatars/${data.user.discordId}/${data.user.avatar}.png`;
+          auth.innerHTML = `<img src="${avatarUrl}" class="w-10 h-10 rounded-full border border-cyan-400">`;
+          if (data.isAdmin) {
+            document.getElementById("admin-link")?.classList.remove("hidden");
+            document.getElementById("mobile-admin-link")?.classList.remove("hidden");
+          }
+        } else {
+          auth.innerHTML = '<a href="/login" class="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-4 rounded-full text-sm">Login</a>';
+        }
+      } catch (e) {
+        auth.innerHTML = '<span class="text-sm text-red-400">Login error</span>';
+      }
+    }
+
+    async function loadServers(offset = 0) {
+      try {
+        const res = await fetch("http://in1.hostmc.fun:25944/api/servers");
+        const servers = await res.json();
+        allServers = servers;
+        document.getElementById("loading").style.display = "none";
+        renderServers(servers.slice(0, serverOffset + serverLimit));
+        serverOffset += serverLimit;
+      } catch (err) {
+        document.getElementById("loading").innerText = "❌ Failed to load servers. Please try again later.";
+      }
+    }
+
+    function renderCard(server) {
+      return `
+        <div class="card p-5 rounded-xl text-white">
+          <div class="flex items-center space-x-4">
+            <img src="${server.icon}" alt="icon" class="w-14 h-14 rounded-full border border-cyan-400 shadow">
+            <div>
+              <h3 class="text-xl font-bold flex items-center">${server.name} ${server.nsfw ? '<span class="nsfw-tag">NSFW</span>' : ''}</h3>
+              <p class="text-gray-400 text-sm">${(server.tags || []).join(" | ")}</p>
+              <p class="text-sm text-green-400 mt-1">🔹 ${server.onlineCount || 0} online</p>
+            </div>
+          </div>
+          <p class="mt-4 text-sm text-gray-300">${server.description}</p>
+          <div class="flex justify-between items-center mt-4">
+            <a href="${server.invite}" target="_blank" class="bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded-full text-sm shadow">Join</a>
+            <button onclick="reportServer('${server.id}')" class="text-sm text-red-400 hover:text-red-500">⚠️ Report</button>
+          </div>
+        </div>
+      `;
+    }
+
+    function renderServers(servers) {
+      const container = document.getElementById("server-list");
+      if (!servers.length) {
+        container.innerHTML = '<p class="text-center text-gray-400 col-span-full">No servers found matching your search.</p>';
+        return;
+      }
+      container.innerHTML = '';
+      servers.forEach((server, i) => {
+        const div = document.createElement('div');
+        div.innerHTML = renderCard(server);
+        container.appendChild(div);
+        if ((i + 1) % 5 === 0) {
+          const adWrap = document.createElement('div');
+          adWrap.innerHTML = `
+            <div class="col-span-full flex justify-center p-2">
+              <ins class="adsbygoogle"
+                style="display:block"
+                data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
+                data-ad-slot="1234567890"
+                data-ad-format="auto"
+                data-full-width-responsive="true"></ins>
+            </div>
+          `;
+          container.appendChild(adWrap);
+          try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
+        }
+      });
+    }
+
+    function filterServers() {
+      const q = document.getElementById("search-input").value.toLowerCase();
+      const filtered = allServers.filter(s =>
+        s.name.toLowerCase().includes(q) ||
+        s.description.toLowerCase().includes(q) ||
+        (s.tags || []).some(t => t.toLowerCase().includes(q))
+      );
+      renderServers(filtered);
+    }
+
+    async function reportServer(id) {
+      const reason = prompt("Why are you reporting this server?");
+      if (!reason) return;
+      try {
+        const res = await fetch(`http://in1.hostmc.fun:25944/api/report/${id}`, {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          credentials: 'include',
+          body: JSON.stringify({ reason })
+        });
+        const data = await res.json();
+        alert(data.success ? "✅ Server reported." : data.error);
+      } catch (e) {
+        alert("❌ Failed to report server.");
+      }
+    }
+
+    window.addEventListener('scroll', () => {
+      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
+        if (serverOffset < allServers.length) {
+          renderServers(allServers.slice(0, serverOffset + serverLimit));
+          serverOffset += serverLimit;
+        }
+      }
+    });
+
+    checkLogin();
+    loadServers();
+  </script></body>
+</html>
