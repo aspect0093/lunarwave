@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta name="google-adsense-account" content="ca-pub-6306733240482491">
+
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lunarwave | Home - Discord Server List</title>
+
+  <link rel="icon" href="favicon.ico" type="image/x-icon">
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
+  <meta property="og:title" content="Lunarwave - Your Go-To Discord Server List with Vibes!" />
+  <meta property="og:description" content="Discover the best Discord servers, find communities, and connect with like-minded people on Lunarwave. A unique server list with ✨ vibes ✨." />
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://lunarwave.space/" /> <meta property="og:image" content="https://cdn.discordapp.com/attachments/1337511198416965632/1384098158854013009/image0.jpg" /> <meta property="og:image:alt" content="Lunarwave logo or banner" />
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Lunarwave - Your Go-To Discord Server List with Vibes!">
+  <meta name="twitter:description" content="Discover the best Discord servers, find communities, and connect with like-minded people on Lunarwave. A unique server list with ✨ vibes ✨.">
+  <meta name="twitter:image" content="https://cdn.discordapp.com/attachments/1337511198416965632/1384098158854013009/image0.jpg"> <meta name="keywords" content="Discord server list, Lunarwave, Discord servers, gaming Discord, community Discord, social Discord, find servers, join Discord, Discord vibes">
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    html, body {
+      height: 100%;
+      overflow: hidden;
+      font-family: 'Segoe UI', sans-serif;
+    }
+    body {
+      background: #000;
+      perspective: 1000px;
+    }
+    .glow-text {
+      background: linear-gradient(to right, #00ffff, #0077ff);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: pulse 3s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.6; }
+    }
+    .parallax {
+      position: absolute;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(#0077ff22, #000);
+      animation: parallaxAnim 60s linear infinite;
+    }
+    @keyframes parallaxAnim {
+      0% { transform: rotate(0deg) scale(1); }
+      100% { transform: rotate(360deg) scale(1.05); }
+    }
+    .stars::before {
+      content: '';
+      position: absolute;
+      width: 300%;
+      height: 300%;
+      background-image: radial-gradient(white 1px, transparent 1px);
+      background-size: 10px 10px;
+      animation: moveStars 100s linear infinite;
+      opacity: 0.05;
+    }
+    @keyframes moveStars {
+      0% { transform: translate(0, 0); }
+      100% { transform: translate(-50%, -50%); }
+    }
+    .moon {
+      width: 100vw;
+      height: 100vh;
+      background: radial-gradient(circle at center, #00ffff22, #000);
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -2;
+    }
+    #splash {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      background: #000;
+      color: white;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+      flex-direction: column;
+      text-align: center;
+    }
+    #welcome-text {
+      font-size: 2.5rem;
+      font-weight: bold;
+    }
+    .typing::after {
+      content: '|';
+      animation: blink 1s infinite;
+    }
+    @keyframes blink {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0; }
+    }
+    #loading-circle {
+      border: 5px solid #00ffff44;
+      border-top: 5px solid #00ffff;
+      border-radius: 50%;
+      width: 60px;
+      height: 60px;
+      animation: spin 1s linear infinite;
+      margin-top: 2rem;
+    }
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    #main-content, #donate-page { /* Removed #ads-page */
+      display: none; /* Initially hidden */
+      animation: fadeSlide 1s ease-out forwards;
+      height: 100%; /* Ensure these take full height for proper centering */
+      width: 100%;
+      position: absolute; /* Position absolutely to stack them */
+      top: 0;
+      left: 0;
+      overflow-y: auto; /* Allow scrolling for content that exceeds screen height */
+    }
+    @keyframes fadeSlide {
+      from { opacity: 0; transform: translateY(30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .back-button {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      font-size: 2rem;
+      color: #00ffff;
+      cursor: pointer;
+      z-index: 100; /* Ensure it's above other content */
+      background: none;
+      border: none;
+      padding: 0;
+    }
+  </style>
+</head>
+<body class="text-white">
+  <div class="parallax stars"></div>
+  <div class="moon"></div>
+
+  <div id="splash">
+    <h1 id="welcome-text" class="glow-text typing"></h1>
+    <div id="loading-circle" style="display: none;"></div>
+  </div>
+
+  <div id="main-content" class="flex flex-col items-center justify-center h-full px-6 text-center">
+    <h1 class="text-5xl font-extrabold glow-text mb-6">Lunarwave</h1>
+    <p class="text-gray-300 max-w-xl mx-auto text-lg mb-10">A Discord server list. But with ✨ vibes ✨</p>
+    <div class="flex flex-wrap justify-center gap-4">
+      <a href="http://in1.hostmc.fun:25944/" target="_blank" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-8 rounded-full transition shadow hover:scale-105">Home</a> <a href="terms.html" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-8 rounded-full transition shadow hover:scale-105">Terms</a>
+      <a href="policy.html" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-8 rounded-full transition shadow hover:scale-105">Policy</a>
+      <a href="rules.html" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-8 rounded-full transition shadow hover:scale-105">Rules</a>
+      <a href="https://youtu.be/q7waF7597WQ" target="_blank" class="bg-cyan-500 hover:bg-cyan-600 text-white font-semibold py-2 px-8 rounded-full transition shadow hover:scale-105">Discord</a>
+      <button onclick="showPage('donate-page')" class="bg-purple-500 hover:bg-purple-600 text-white font-semibold py-2 px-8 rounded-full transition shadow hover:scale-105">Donate & Support</button>
+    </div>
+  </div>
+
+  <div id="donate-page" class="flex flex-col items-center justify-center h-full px-6 text-center">
+    <button class="back-button" onclick="goBack()">&lt;</button>
+    <h2 class="text-4xl font-extrabold glow-text mb-6">Support Lunarwave 💖</h2>
+    <p class="text-gray-300 max-w-xl mx-auto text-lg mb-10">
+      Lunarwave is a passion project, and I currently lose money keeping it running. Your generous donations help cover server costs and allow me to dedicate more time to improving the site!
+    </p>
+    <a href="https://aspect93.gumroad.com/coffee" target="_blank" class="bg-indigo-600 hover:bg-indigo-700 text-white font-semibold py-3 px-10 rounded-full transition shadow hover:scale-105 text-xl mb-6">
+        Donate Now!
+    </a>
+    <p class="text-gray-400 max-w-xl mx-auto text-md">
+      Thank you for your incredible support! Every little bit helps.
+    </p>
+  </div>
+
+  <script>
+    const splash = document.getElementById("splash");
+    const mainContent = document.getElementById("main-content");
+    const donatePage = document.getElementById("donate-page"); // adsPage removed
+    const welcomeText = document.getElementById("welcome-text");
+    const loadingCircle = document.getElementById("loading-circle");
+    const message = "Welcome Emo";
+    let i = 0;
+    let currentPage = 'main-content'; // Keep track of the current visible page
+
+    function typeWelcome() {
+      if (i < message.length) {
+        welcomeText.textContent += message.charAt(i);
+        i++;
+        setTimeout(typeWelcome, 60);
+      } else {
+        welcomeText.classList.remove('typing');
+        loadingCircle.style.display = "block";
+        setTimeout(() => {
+          splash.style.display = "none";
+          mainContent.style.display = "flex";
+        }, 2000);
+      }
+    }
+
+    // Function to show a specific page and hide others
+    function showPage(pageId) {
+      mainContent.style.display = "none";
+      // adsPage removed
+      donatePage.style.display = "none";
+
+      const targetPage = document.getElementById(pageId);
+      if (targetPage) {
+        targetPage.style.display = "flex";
+        currentPage = pageId; // Update current page
+      }
+    }
+
+    // Function to go back to the main content (home)
+    function goBack() {
+      showPage('main-content');
+    }
+
+    // goHomeFromDonate function removed as "Done" button is gone
+
+    window.onload = typeWelcome;
+  </script>
+</body>
+</html>
