@@ -1,24 +1,39 @@
-<!DOCTYPE html><html lang="en">
+<!DOCTYPE html>
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
   <title>Lunarwave | Discover Discord Servers</title>
-  <script src="https://cdn.tailwindcss.com"></script>
-  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-XXXXXXXXXXXXXXXX" crossorigin="anonymous"></script>
+  <meta name="description" content="Find and discover your next favorite Discord server. Browse active communities, bump your server, and grow your presence with Lunarwave.">
+  <meta name="keywords" content="Discord servers, Discord, community, server list, gaming, anime, tech, social, public discord, discover discord, server advertising, server bump">
+  <meta name="author" content="Lunarwave Team">
+
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://your-github-pages-domain.com/"> <meta property="og:title" content="Lunarwave | Discover Discord Servers">
+  <meta property="og:description" content="Find and discover your next favorite Discord server. Browse active communities, bump your server, and grow your presence with Lunarwave.">
+  <meta property="og:image" content="https://your-github-pages-domain.com/banner.png"> <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://your-github-pages-domain.com/"> <meta property="twitter:title" content="Lunarwave | Discover Discord Servers">
+  <meta property="twitter:description" content="Find and discover your next favorite Discord server. Browse active communities, bump your server, and grow your presence with Lunarwave.">
+  <meta property="twitter:image" content="https://your-github-pages-domain.com/banner.png"> <link rel="icon" href="/favicon.png" type="image/png"> <script src="https://cdn.tailwindcss.com"></script>
   <style>
-    body { font-family: 'Segoe UI', sans-serif; }
+    body { font-family: 'Segoe UI', sans-serif; background-color: #0d1117; color: #e6edf3; }
     .glow-text {
       background: linear-gradient(to right, #00ffff, #0077ff);
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
     }
     .card {
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.08);
+      background: rgba(30, 36, 45, 0.7); /* Darker, slightly translucent */
+      border: 1px solid rgba(48, 54, 61, 0.8);
       backdrop-filter: blur(10px);
       transition: transform 0.3s, box-shadow 0.3s;
+      border-radius: 0.75rem; /* Equivalent to rounded-xl */
     }
-    .card:hover { transform: scale(1.01); box-shadow: 0 0 15px #00ffff33; }
+    .card:hover {
+      transform: translateY(-5px); /* Lift effect */
+      box-shadow: 0 8px 20px rgba(0, 255, 255, 0.15); /* More prominent glow */
+    }
     .nsfw-tag {
       background-color: #dc2626;
       color: white;
@@ -26,172 +41,388 @@
       border-radius: 4px;
       font-size: 0.75rem;
       margin-left: 6px;
+      display: inline-block; /* Ensure it respects margin */
+    }
+    .tag-item {
+      background-color: rgba(0, 191, 255, 0.2); /* Light cyan background */
+      color: #00ffff; /* Cyan text */
+      padding: 3px 8px;
+      border-radius: 9999px; /* Pill shape */
+      font-size: 0.7rem;
+      white-space: nowrap; /* Prevent tag text from wrapping */
+    }
+    /* Report Popup Styles */
+    .popup-overlay {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.7);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    }
+    .popup-content {
+        background: #1a202c; /* Dark background */
+        padding: 25px;
+        border-radius: 12px;
+        box-shadow: 0 5px 25px rgba(0, 255, 255, 0.2);
+        position: relative;
+        width: 90%;
+        max-width: 400px;
+        color: #e6edf3;
+        animation: fadeIn 0.3s ease-out;
+    }
+    .popup-close {
+        position: absolute;
+        top: 10px;
+        right: 15px;
+        font-size: 24px;
+        cursor: pointer;
+        color: #e6edf3;
+    }
+    .popup-textarea {
+        width: 100%;
+        padding: 10px;
+        margin-top: 15px;
+        margin-bottom: 15px;
+        border-radius: 6px;
+        border: 1px solid #4a5568;
+        background-color: #2d3748;
+        color: #e6edf3;
+        resize: vertical;
+        min-height: 80px;
+    }
+    .popup-submit-btn {
+        background-color: #00ffff;
+        color: #1a202c;
+        padding: 10px 20px;
+        border-radius: 8px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    .popup-submit-btn:hover {
+        background-color: #00e6e6;
+    }
+    @keyframes fadeIn {
+        from { opacity: 0; transform: scale(0.9); }
+        to { opacity: 1; transform: scale(1); }
     }
   </style>
+
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6306733240482491" crossorigin="anonymous"></script>
 </head>
 <body class="bg-black text-white">
-  <!-- Navbar -->
-  <nav class="bg-black/80 shadow-md fixed w-full top-0 z-50">
-    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <h1 class="text-cyan-400 text-2xl font-bold">Lunarwave</h1>
-      <div class="flex items-center space-x-4">
-        <button class="md:hidden text-white text-3xl" onclick="toggleMenu()">☰</button>
-        <div id="auth-section"></div>
-      </div>
-      <ul id="menu" class="hidden md:flex space-x-4 text-white font-medium">
-        <li><a href="#" class="hover:text-cyan-400">Home</a></li>
-        <li><a href="#" class="hover:text-cyan-400">Submit</a></li>
-        <li><a href="#" class="hover:text-cyan-400">My Servers</a></li>
-        <li id="admin-link" class="hidden"><a href="#" class="hover:text-red-400">Admin Panel</a></li>
-      </ul>
+
+<nav class="bg-black/80 shadow-md fixed w-full top-0 z-50 backdrop-blur-sm">
+  <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+    <a href="/" class="text-cyan-400 text-2xl font-bold">Lunarwave</a>
+    <div class="flex items-center space-x-4">
+      <button class="md:hidden text-white text-3xl" onclick="toggleMenu()">☰</button>
+      <div id="auth-section"></div>
     </div>
-    <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 text-white">
-      <a href="#" class="block py-2">Home</a>
-      <a href="#" class="block py-2">Submit</a>
-      <a href="#" class="block py-2">My Servers</a>
-      <a id="mobile-admin-link" href="#" class="block py-2 text-red-400 hidden">Admin Panel</a>
+    <ul id="menu" class="hidden md:flex space-x-4 text-white font-medium">
+      <li><a href="/" class="hover:text-cyan-400 transition-colors">Home</a></li>
+      <li><a href="/myservers.html" class="hover:text-cyan-400 transition-colors">My Servers</a></li>
+      <li id="dashboard-link" class="hidden"><a href="/admin/dashboard.html" class="hover:text-cyan-400 transition-colors">Dashboard</a></li>
+    </ul>
+  </div>
+  <div id="mobile-menu" class="md:hidden hidden px-4 pb-4 text-white bg-black/90">
+    <a href="/" class="block py-2 hover:text-cyan-400 transition-colors">Home</a>
+    <a href="/myservers.html" class="block py-2 hover:text-cyan-400 transition-colors">My Servers</a>
+    <a id="mobile-dashboard-link" href="/admin/dashboard.html" class="block py-2 hover:text-cyan-400 transition-colors hidden">Dashboard</a>
+  </div>
+</nav>
+
+<header class="text-center pt-32 px-4 pb-12 bg-gradient-to-b from-gray-900 to-black">
+  <h1 class="text-5xl md:text-6xl font-extrabold glow-text mb-4 leading-tight">Discover Discord Servers</h1>
+  <p class="text-gray-300 max-w-lg mx-auto text-lg mb-8">Find your next favorite community. Bump your server and watch it grow!</p>
+  <div class="mt-4 flex justify-center flex-wrap gap-2">
+    <input id="search-input" type="text" placeholder="Search tags or keywords..." class="px-5 py-3 rounded-md text-black bg-gray-200 border border-gray-400 focus:outline-none focus:ring-2 focus:ring-cyan-500 w-full max-w-sm">
+    <button onclick="filterServers()" class="bg-cyan-600 px-6 py-3 rounded-md text-white font-semibold hover:bg-cyan-700 transition-colors shadow-lg">Search</button>
+  </div>
+</header>
+
+<main class="px-4 mt-14 max-w-7xl mx-auto">
+  <h2 class="text-3xl font-bold mb-6 text-cyan-400">🔥 Recently Bumped Servers</h2>
+
+  <div id="server-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-8"></div>
+
+  <p id="loading" class="text-center text-gray-400 mt-8 text-lg">Loading servers...</p>
+  <p id="no-more-servers" class="text-center text-gray-500 mt-8 text-lg hidden">No more servers to load.</p>
+</main>
+
+<div id="report-popup-overlay" class="popup-overlay hidden">
+    <div class="popup-content">
+        <span class="popup-close" onclick="closeReportPopup()">&times;</span>
+        <h3 class="text-xl font-bold mb-3">Report Server</h3>
+        <p class="text-sm text-gray-400">Please provide a clear reason for reporting this server.</p>
+        <textarea id="report-reason-textarea" class="popup-textarea" placeholder="Enter your reason here..."></textarea>
+        <button id="submit-report-btn" class="popup-submit-btn w-full">Submit Report</button>
     </div>
-  </nav>  <header class="text-center pt-32 px-4">
-    <h1 class="text-5xl font-extrabold glow-text mb-3">Discover Discord Servers</h1>
-    <p class="text-gray-300 max-w-lg mx-auto mb-6">Find your next favorite community. Bump your server. All in Lunarwave style.</p>
-    <div class="mt-4 flex justify-center">
-      <input id="search-input" type="text" placeholder="Search tags or keywords..." class="px-4 py-2 rounded-l-md text-black">
-      <button onclick="filterServers()" class="bg-cyan-500 px-4 py-2 rounded-r-md hover:bg-cyan-600">Search</button>
-    </div>
-  </header>  <section class="px-4 mt-14 max-w-6xl mx-auto">
-    <h2 class="text-2xl font-bold mb-4 text-cyan-400">🔥 Top Active Servers</h2>
-    <div id="server-list" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6"></div>
-    <p id="loading" class="text-center text-gray-400 mt-6">Loading servers...</p>
-  </section>  <footer class="text-center text-gray-600 text-sm py-6 mt-16 border-t border-gray-800">
-    © 2025 Lunarwave. Built for community.
-  </footer>  <script>
-    let allServers = [];
-    let serverOffset = 0;
-    const serverLimit = 12;
+</div>
 
-    function toggleMenu() {
-      document.getElementById("mobile-menu").classList.toggle("hidden");
-    }
+<footer class="text-center text-gray-600 text-sm py-8 mt-20 border-t border-gray-800">
+  © 2025 Lunarwave. Built for community.
+</footer>
 
-    async function checkLogin() {
-      const auth = document.getElementById("auth-section");
-      try {
-        const res = await fetch("http://in1.hostmc.fun:25944/api/user", { credentials: 'include' });
-        const data = await res.json();
-        if (data.loggedIn) {
-          const avatarUrl = `https://cdn.discordapp.com/avatars/${data.user.discordId}/${data.user.avatar}.png`;
-          auth.innerHTML = `<img src="${avatarUrl}" class="w-10 h-10 rounded-full border border-cyan-400">`;
-          if (data.isAdmin) {
-            document.getElementById("admin-link")?.classList.remove("hidden");
-            document.getElementById("mobile-admin-link")?.classList.remove("hidden");
-          }
-        } else {
-          auth.innerHTML = '<a href="/login" class="bg-cyan-500 hover:bg-cyan-600 text-white py-2 px-4 rounded-full text-sm">Login</a>';
-        }
-      } catch (e) {
-        auth.innerHTML = '<span class="text-sm text-red-400">Login error</span>';
-      }
-    }
+<script>
+// --- Configuration ---
+// IMPORTANT: Replace this with your actual API endpoint.
+// For production, this should be your HTTPS API domain (e.g., 'https://api.yourdomain.com')
+const API_BASE_URL = 'http://in1.hostmc.fun:25944'; // <-- CHANGE THIS TO YOUR API'S URL (e.g., 'https://api.yourdomain.com')
 
-    async function loadServers(offset = 0) {
-      try {
-        const res = await fetch("http://in1.hostmc.fun:25944/api/servers");
-        const servers = await res.json();
-        allServers = servers;
-        document.getElementById("loading").style.display = "none";
-        renderServers(servers.slice(0, serverOffset + serverLimit));
-        serverOffset += serverLimit;
-      } catch (err) {
-        document.getElementById("loading").innerText = "❌ Failed to load servers. Please try again later.";
-      }
-    }
+// --- Global Variables ---
+let allServers = []; // Stores all fetched servers
+let displayedServers = 0; // Number of servers currently displayed
+const serversPerLoad = 15; // Number of servers to load at a time
+let isLoading = false; // To prevent multiple loads during infinite scroll
+let currentSearchQuery = ''; // Stores the current search query
+let activeServerIdForReport = null; // Store ID for report popup
 
-    function renderCard(server) {
-      return `
-        <div class="card p-5 rounded-xl text-white">
-          <div class="flex items-center space-x-4">
-            <img src="${server.icon}" alt="icon" class="w-14 h-14 rounded-full border border-cyan-400 shadow">
-            <div>
-              <h3 class="text-xl font-bold flex items-center">${server.name} ${server.nsfw ? '<span class="nsfw-tag">NSFW</span>' : ''}</h3>
-              <p class="text-gray-400 text-sm">${(server.tags || []).join(" | ")}</p>
-              <p class="text-sm text-green-400 mt-1">🔹 ${server.onlineCount || 0} online</p>
-            </div>
-          </div>
-          <p class="mt-4 text-sm text-gray-300">${server.description}</p>
-          <div class="flex justify-between items-center mt-4">
-            <a href="${server.invite}" target="_blank" class="bg-green-500 hover:bg-green-600 text-white py-1 px-4 rounded-full text-sm shadow">Join</a>
-            <button onclick="reportServer('${server.id}')" class="text-sm text-red-400 hover:text-red-500">⚠️ Report</button>
-          </div>
-        </div>
+// --- Utility Functions ---
+function toggleMenu() {
+  document.getElementById("mobile-menu").classList.toggle("hidden");
+}
+
+function timeAgo(timestamp) {
+  if (!timestamp) return "Never bumped";
+  const diff = Math.floor((Date.now() - timestamp) / 1000);
+  if (diff < 60) return `${diff}s ago`;
+  if (diff < 3600) return `${Math.floor(diff / 60)}h ago`;
+  if (diff < 86400) return `${Math.floor(diff / 3600)}h ago`; // Corrected: This should be hours, not days
+  return `${Math.floor(diff / 86400)}d ago`;
+}
+
+// --- Auth & Navbar ---
+async function checkLogin() {
+  const auth = document.getElementById("auth-section");
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/user`, { credentials: 'include' });
+    if (!res.ok) throw new Error('API response not OK for user check');
+    const data = await res.json();
+
+    if (data.loggedIn) {
+      const avatar = `https://cdn.discordapp.com/avatars/${data.user.id}/${data.user.avatar}.png`;
+      auth.innerHTML = `
+        <a href="/myservers.html">
+            <img src="${avatar}" alt="User Avatar" class="w-10 h-10 rounded-full border border-cyan-400 shadow-md transition-transform hover:scale-105">
+        </a>
       `;
-    }
-
-    function renderServers(servers) {
-      const container = document.getElementById("server-list");
-      if (!servers.length) {
-        container.innerHTML = '<p class="text-center text-gray-400 col-span-full">No servers found matching your search.</p>';
-        return;
+      if (data.isAdmin) {
+        document.getElementById("dashboard-link")?.classList.remove("hidden");
+        document.getElementById("mobile-dashboard-link")?.classList.remove("hidden");
       }
-      container.innerHTML = '';
-      servers.forEach((server, i) => {
-        const div = document.createElement('div');
-        div.innerHTML = renderCard(server);
-        container.appendChild(div);
-        if ((i + 1) % 5 === 0) {
-          const adWrap = document.createElement('div');
-          adWrap.innerHTML = `
-            <div class="col-span-full flex justify-center p-2">
-              <ins class="adsbygoogle"
-                style="display:block"
-                data-ad-client="ca-pub-XXXXXXXXXXXXXXXX"
-                data-ad-slot="1234567890"
-                data-ad-format="auto"
-                data-full-width-responsive="true"></ins>
-            </div>
-          `;
-          container.appendChild(adWrap);
-          try { (adsbygoogle = window.adsbygoogle || []).push({}); } catch (e) {}
-        }
-      });
+    } else {
+      auth.innerHTML = '<a href="/login" class="bg-cyan-600 hover:bg-cyan-700 text-white py-2 px-4 rounded-full text-sm font-semibold transition-colors shadow-md">Login</a>';
     }
+  } catch (error) {
+    console.error("Login check error:", error);
+    auth.innerHTML = '<span class="text-sm text-red-400">Login error. <a href="/login" class="underline">Retry</a></span>';
+  }
+}
 
-    function filterServers() {
-      const q = document.getElementById("search-input").value.toLowerCase();
-      const filtered = allServers.filter(s =>
-        s.name.toLowerCase().includes(q) ||
-        s.description.toLowerCase().includes(q) ||
-        (s.tags || []).some(t => t.toLowerCase().includes(q))
-      );
-      renderServers(filtered);
-    }
+// --- Server Loading & Display ---
+async function loadServers() {
+  if (isLoading) return; // Prevent multiple simultaneous loads
+  isLoading = true;
+  document.getElementById("loading").style.display = "block"; // Show loading text
 
-    async function reportServer(id) {
-      const reason = prompt("Why are you reporting this server?");
-      if (!reason) return;
-      try {
-        const res = await fetch(`http://in1.hostmc.fun:25944/api/report/${id}`, {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          credentials: 'include',
-          body: JSON.stringify({ reason })
-        });
-        const data = await res.json();
-        alert(data.success ? "✅ Server reported." : data.error);
-      } catch (e) {
-        alert("❌ Failed to report server.");
-      }
-    }
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/servers`);
+    if (!res.ok) throw new Error('Failed to fetch servers from API');
+    const servers = await res.json();
 
-    window.addEventListener('scroll', () => {
-      if (window.innerHeight + window.scrollY >= document.body.offsetHeight - 100) {
-        if (serverOffset < allServers.length) {
-          renderServers(allServers.slice(0, serverOffset + serverLimit));
-          serverOffset += serverLimit;
-        }
-      }
+    // Sort by lastBump (recent) and then by onlineCount (big)
+    servers.sort((a, b) => {
+        // Prioritize recently bumped
+        if (b.lastBump && a.lastBump) return b.lastBump - a.lastBump;
+        if (b.lastBump) return 1; // b has a bump, a doesn't
+        if (a.lastBump) return -1; // a has a bump, b doesn't
+        // If no bumps, sort by online count (assuming your API provides it)
+        return (b.onlineCount || 0) - (a.onlineCount || 0);
     });
 
-    checkLogin();
-    loadServers();
-  </script></body>
+    allServers = servers;
+    document.getElementById("loading").style.display = "none";
+    document.getElementById("server-list").innerHTML = ''; // Clear existing servers
+    displayedServers = 0; // Reset counter
+
+    // Load initial batch of servers
+    appendServers();
+  } catch (error) {
+    console.error("Error loading servers:", error);
+    document.getElementById("loading").innerText = "❌ Failed to load servers. Please try again later.";
+  } finally {
+    isLoading = false;
+  }
+}
+
+function renderCard(server) {
+  // Ensure icon is a valid URL or provide a placeholder
+  const iconUrl = server.icon && server.icon.startsWith('http') ? server.icon : 'https://cdn.discordapp.com/embed/avatars/0.png';
+  const tagsHtml = (server.tags || []).map(tag => `<span class="tag-item">#${tag}</span>`).join(" ");
+
+  return `
+    <div class="card p-6 rounded-xl shadow-lg flex flex-col justify-between">
+      <div>
+        <div class="flex items-center space-x-4 mb-4">
+          <img src="${iconUrl}" alt="${server.name} icon" class="w-16 h-16 rounded-full border-2 border-cyan-500 shadow-md object-cover">
+          <div>
+            <h3 class="text-2xl font-bold flex items-center mb-1">${server.name} ${server.nsfw ? '<span class="nsfw-tag">NSFW</span>' : ''}</h3>
+            <p class="text-sm text-gray-400">
+                <span class="text-green-400 font-semibold">Online: ${server.onlineCount || 'N/A'}</span> &bull; Last Bumped: ${timeAgo(server.lastBump)}
+            </p>
+          </div>
+        </div>
+        <p class="mt-2 text-base text-gray-300 mb-4">${server.description}</p>
+        <div class="flex flex-wrap gap-2 mb-4">
+            ${tagsHtml}
+        </div>
+      </div>
+      <div class="flex justify-between items-center mt-auto pt-4 border-t border-gray-700">
+        <a href="${server.invite}" target="_blank" class="bg-blue-600 hover:bg-blue-700 text-white py-2 px-5 rounded-full text-md font-semibold transition-colors shadow">Join Server</a>
+        <button onclick="openReportPopup('${server.id}')" class="text-sm text-red-500 hover:text-red-400 font-medium transition-colors">⚠️ Report</button>
+      </div>
+    </div>`;
+}
+
+function appendServers() {
+  const container = document.getElementById("server-list");
+  const filteredServers = currentSearchQuery
+    ? allServers.filter(s =>
+        s.name.toLowerCase().includes(currentSearchQuery) ||
+        s.description.toLowerCase().includes(currentSearchQuery) ||
+        (s.tags || []).some(t => t.toLowerCase().includes(currentSearchQuery))
+      )
+    : allServers;
+
+  const startIndex = displayedServers;
+  const endIndex = startIndex + serversPerLoad;
+  const serversToRender = filteredServers.slice(startIndex, endIndex);
+
+  if (serversToRender.length === 0 && displayedServers === 0) {
+      container.innerHTML = '<p class="text-center text-gray-500 text-lg col-span-full">No servers found matching your criteria.</p>';
+      document.getElementById("no-more-servers").style.display = "none";
+      document.getElementById("loading").style.display = "none";
+      return;
+  }
+  
+  if (serversToRender.length === 0) {
+      document.getElementById("no-more-servers").style.display = "block";
+      document.getElementById("loading").style.display = "none";
+      return;
+  }
+
+  serversToRender.forEach((s, i) => {
+    const cardHtml = renderCard(s);
+    container.innerHTML += cardHtml;
+
+    // Ad Placement (e.g., every 5th server card)
+    if ( (startIndex + i + 1) % 5 === 0 && (startIndex + i + 1) < filteredServers.length ) {
+      container.appendChild(renderAdCard());
+    }
+  });
+
+  displayedServers += serversToRender.length;
+  document.getElementById("no-more-servers").style.display = displayedServers >= filteredServers.length ? "block" : "none";
+}
+
+function renderAdCard() {
+  const adDiv = document.createElement("div");
+  adDiv.className = "card p-6 rounded-xl shadow-lg flex justify-center items-center bg-gradient-to-br from-gray-800 to-black text-center min-h-[250px]"; // Added min-height for ad
+  adDiv.innerHTML = `
+    <ins class="adsbygoogle"
+      style="display:block;"
+      data-ad-client="ca-pub-6306733240482491" data-ad-slot="1234567890" data-ad-format="auto"
+      data-full-width-responsive="true"></ins>`;
+  
+  // Push ad to AdSense stack after a short delay to ensure DOM is ready
+  setTimeout(() => {
+    try {
+      (window.adsbygoogle = window.adsbygoogle || []).push({});
+    } catch (e) {
+      console.error("AdSense push error:", e);
+    }
+  }, 100); // Small delay might help
+  return adDiv;
+}
+
+// --- Search Functionality ---
+function filterServers() {
+  currentSearchQuery = document.getElementById("search-input").value.toLowerCase().trim();
+  document.getElementById("server-list").innerHTML = ''; // Clear current display
+  displayedServers = 0; // Reset pagination
+  document.getElementById("no-more-servers").style.display = "none";
+  document.getElementById("loading").style.display = "none"; // Hide loading text initially for search
+
+  // Re-append servers based on the new filter
+  // This will re-sort and re-paginate from the beginning
+  appendServers();
+}
+
+// --- Report Popup Logic ---
+function openReportPopup(serverId) {
+  activeServerIdForReport = serverId;
+  document.getElementById('report-popup-overlay').classList.remove('hidden');
+  document.getElementById('report-reason-textarea').value = ''; // Clear previous text
+}
+
+function closeReportPopup() {
+  document.getElementById('report-popup-overlay').classList.add('hidden');
+  activeServerIdForReport = null;
+}
+
+document.getElementById('submit-report-btn').addEventListener('click', async () => {
+  const reason = document.getElementById('report-reason-textarea').value.trim();
+  if (!reason) {
+    alert("Please provide a reason for reporting.");
+    return;
+  }
+
+  if (!activeServerIdForReport) {
+      alert("Error: No server selected for report.");
+      closeReportPopup();
+      return;
+  }
+
+  try {
+    const res = await fetch(`${API_BASE_URL}/api/report/${activeServerIdForReport}`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ reason })
+    });
+
+    const data = await res.json();
+    if (data.success) {
+      alert("✅ Server reported successfully.");
+      closeReportPopup();
+    } else {
+      alert(`❌ Failed to report server: ${data.error || 'Unknown error.'}`);
+    }
+  } catch (error) {
+    console.error("Error reporting server:", error);
+    alert("❌ Failed to report server due to network error.");
+  }
+});
+
+// --- Infinite Scroll ---
+window.addEventListener('scroll', () => {
+  const { scrollTop, scrollHeight, clientHeight } = document.documentElement;
+  // Load more servers when user scrolls near the bottom of the page
+  if (scrollTop + clientHeight >= scrollHeight - 300 && !isLoading && displayedServers < allServers.length) {
+    appendServers();
+  }
+});
+
+// --- Initial Load ---
+checkLogin();
+loadServers(); // Initial load of servers
+</script>
+
+</body>
 </html>
