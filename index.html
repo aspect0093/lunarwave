@@ -1,7 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta name="google-adsense-account" content="ca-pub-6306733240482491">
+<meta name="google-adsense-account" content="ca-pub-6306733240482491">
+
 
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -141,20 +142,17 @@
       padding: 0;
     }
 
-    /* AdSense Placeholder Styles */
-    .adsense-ad-placeholder {
-      background: rgba(0, 255, 255, 0.1); /* Light cyan transparent background */
-      border: 1px dashed #00ffff;
-      padding: 20px;
-      margin: 20px auto;
-      text-align: center;
-      color: #00ffff;
-      font-size: 1rem;
-      max-width: 728px; /* Typical ad banner width */
+    /* AdSense Placeholder Styles (these are for visual distinction, the actual ad code replaces them) */
+    .ads-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px; /* Space between ad units */
+        margin-top: 20px;
     }
-    .adsense-ad-placeholder h3 {
-        margin-bottom: 10px;
-        color: #00ffff;
+    .adsense-ad-unit {
+        /* Style if needed, but AdSense itself provides styling */
+        text-align: center;
     }
   </style>
 </head>
@@ -180,10 +178,17 @@
       <button onclick="showPage('ads-page')" class="bg-emerald-500 hover:bg-emerald-600 text-white font-semibold py-2 px-8 rounded-full transition shadow hover:scale-105">Watch Ads</button>
     </div>
 
-    <div class="adsense-ad-placeholder mt-12 w-full max-w-3xl">
-        <h3>AdSense Ad Unit (Home Page Banner)</h3>
-        <p>This is where your Google AdSense ad code will go.</p>
-        </div>
+    <div class="adsense-ad-unit mt-12">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6306733240482491"
+             crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-6306733240482491"
+             data-ad-slot="3263847140"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
   </div>
 
   <div id="donate-page" class="flex flex-col items-center justify-center h-full px-6 text-center">
@@ -198,12 +203,18 @@
     <p class="text-gray-400 max-w-xl mx-auto text-md">
       Thank you for your incredible support! Every little bit helps.
     </p>
-    <button onclick="goHomeFromDonate()" class="mt-8 bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-8 rounded-full transition shadow hover:scale-105">Done</button>
 
-    <div class="adsense-ad-placeholder mt-12 w-full max-w-3xl">
-        <h3>AdSense Ad Unit (Donate Page)</h3>
-        <p>Another spot for your AdSense ads to help earn revenue.</p>
-        </div>
+    <div class="adsense-ad-unit mt-12">
+        <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6306733240482491"
+             crossorigin="anonymous"></script>
+        <ins class="adsbygoogle"
+             style="display:inline-block;width:728px;height:90px"
+             data-ad-client="ca-pub-6306733240482491"
+             data-ad-slot="3263847140"></ins>
+        <script>
+             (adsbygoogle = window.adsbygoogle || []).push({});
+        </script>
+    </div>
   </div>
 
   <div id="ads-page" class="flex flex-col items-center justify-center h-full px-6 text-center">
@@ -213,21 +224,45 @@
       Help support Lunarwave directly by watching short ads! This is the best way to contribute without spending your own money.
     </p>
 
-    <div class="flex flex-col gap-8 w-full max-w-4xl">
-        <div class="adsense-ad-placeholder w-full">
-            <h3>AdSense Ad Unit (Watch Ads - Top Banner)</h3>
-            <p>Place your large banner or responsive ad unit here.</p>
-            </div>
+    <div class="ads-container w-full max-w-4xl">
+        <div class="adsense-ad-unit">
+            <h3>Top Banner Ad</h3>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6306733240482491"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-6306733240482491"
+                 data-ad-slot="3263847140"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
 
-        <div class="adsense-ad-placeholder w-full">
-            <h3>AdSense Ad Unit (Watch Ads - Interstitial/Video Ad Placeholder)</h3>
-            <p>This could be a video ad or a larger interstitial ad unit. Ensure you follow AdSense policies for placement and user experience.</p>
-            </div>
+        <div class="adsense-ad-unit">
+            <h3>Middle Banner Ad</h3>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6306733240482491"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-6306733240482491"
+                 data-ad-slot="3263847140"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
 
-        <div class="adsense-ad-placeholder w-full">
-            <h3>AdSense Ad Unit (Watch Ads - Bottom Banner)</h3>
-            <p>Another spot for a regular display ad.</p>
-            </div>
+        <div class="adsense-ad-unit">
+            <h3>Bottom Banner Ad</h3>
+            <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-6306733240482491"
+                 crossorigin="anonymous"></script>
+            <ins class="adsbygoogle"
+                 style="display:inline-block;width:728px;height:90px"
+                 data-ad-client="ca-pub-6306733240482491"
+                 data-ad-slot="3263847140"></ins>
+            <script>
+                 (adsbygoogle = window.adsbygoogle || []).push({});
+            </script>
+        </div>
     </div>
 
     <p class="text-gray-400 max-w-xl mx-auto text-md mt-10">
@@ -280,13 +315,9 @@
       showPage('main-content');
     }
 
-    // Function for "Done" button on Donate page to go to a different site then home
+    // This function is still present for the donate link, but the "Done" button is removed.
     function goHomeFromDonate() {
         window.location.href = "https://www.yournewhomepage.com"; // Replace with the actual URL for the "different site"
-        // After navigating, if they come back, they will land on the default index.html, which is your home.
-        // If you want to ensure they always land on main-content within this single-page app, you'd do:
-        // window.location.href = "https://www.yournewhomepage.com";
-        // setTimeout(() => { showPage('main-content'); }, 1000); // Small delay before showing home page
     }
 
 
